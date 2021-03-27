@@ -1,4 +1,4 @@
-#compdef dropbox-cli
+#compdef dropbox
 #autoload
 
 local -a _1st_arguments
@@ -52,7 +52,7 @@ _dropbox_exclude=(
 
 _dropbox_exclude_files=(
   $(
-    dropbox-cli exclude list | sed 1d | awk '{ print "\""$0"\""}'
+    dropbox exclude list | sed 1d | awk '{ print "\""$0"\""}'
   )
 )
 
@@ -60,23 +60,23 @@ _arguments \
 '*:: :->subcmds' && return 0
 
 if (( CURRENT == 1 )); then
-  _describe -t commands "Dropbox-cli subcommand" _1st_arguments
+  _describe -t commands "Dropbox subcommand" _1st_arguments
   return
 fi
 
 if (( CURRENT == 2 )); then
   case "$words[1]" in
     autostart)
-      _describe -t commands "Dropbox-cli autostart" _dropbox_autostart
+      _describe -t commands "Dropbox autostart" _dropbox_autostart
     ;;
     lansync)
-      _describe -t commands "Dropbox-cli lansync" _dropbox_lansync
+      _describe -t commands "Dropbox lansync" _dropbox_lansync
     ;;
     proxy)
-      _describe -t commands "Dropbox-cli proxy" _dropbox_proxy
+      _describe -t commands "Dropbox proxy" _dropbox_proxy
     ;;
     exclude)
-      _describe -t commands "Dropbox-cli exclude" _dropbox_exclude
+      _describe -t commands "Dropbox exclude" _dropbox_exclude
     ;;
     puburl|ls|filestatus|sharelink)
       _files
@@ -108,7 +108,7 @@ if (( CURRENT > 2 )); then
   elif [[ "$words[1]" == "proxy" ]]; then
     if (( CURRENT == 3 )); then
       if [[ "$words[2]" == "manual" ]]; then
-        _describe -t commands "Dropbox-cli proxy" _dropbox_proxy_types
+        _describe -t commands "Dropbox proxy" _dropbox_proxy_types
       fi
     fi
   fi
